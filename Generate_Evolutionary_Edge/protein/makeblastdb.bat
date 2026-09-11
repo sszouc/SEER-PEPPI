@@ -1,0 +1,1 @@
+makeblastdb -dbtype prot -in all_sequences.fasta -input_type fasta -parse_seqids -out protein

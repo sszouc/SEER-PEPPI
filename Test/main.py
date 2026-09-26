@@ -8,12 +8,12 @@ from Test.summarizer import FiveFoldSummarizer
 os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
 
 def main():
-    parser = argparse.ArgumentParser(description="在验证图上评估预训练的GNN模型。")
+    parser = argparse.ArgumentParser(description="train pipline")
     parser.add_argument("--graph", type=str, default=r"D:\pyprogram\fanhua\graph\output\graph\graph_1440.dgl",
-                        help="DGL图文件路径（例如：./data/graph.dgl）")
+                        help="directory of the graph(e.i., data/graph.dgl)")
     parser.add_argument("--model_dir", type=str, default=r"D:\pyprogram\edge\result_V4",
-                        help="包含5个模型文件的目录：fold1_best_model.pth ... fold5_best_model.pth")
-    parser.add_argument("--output_dir", type=str, default=r"C:\Users\omen\Desktop\泛化实验结果",
+                        help="directory includes 5 model: fold0_best_model.pth ... fold4_best_model.pth")
+    parser.add_argument("--output_dir", type=str, default="./results",
                         help="保存评估结果的目录（默认：./results)")
     parser.add_argument("--device", type=str, default="cuda:0",
                         help="运行设备（例如：'cuda:0' 或 'cpu'）")

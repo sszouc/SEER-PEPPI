@@ -94,7 +94,6 @@ def write_sequence_pkl(path: Path, sequences: List[str]) -> None:
             seen.add(seq)
             unique_sequences.append(seq)
 
-    # Keep item[0] == sequence for compatibility with Generate_Prot5_feature/Example.py
     payload = [(seq,) for seq in unique_sequences]
     with path.open("wb") as f:
         pickle.dump(payload, f)

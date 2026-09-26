@@ -12,7 +12,6 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# Configure file paths
 INPUT_PKL = f"input_sequences_{args.type}.pkl"
 PROT5_EMBEDDING_PKL = f"prot5_embeddings_{args.type}.pkl"
 PROT5_SIMILARITY_PKL = f"prot5_similarity_{args.type}.pkl"
@@ -20,7 +19,6 @@ PROT5_SIMILARITY_PKL = f"prot5_similarity_{args.type}.pkl"
 PROT5_MODEL_PATH = "prot_t5_xl_uniref50"
 PROT5_TOKENIZER_PATH = PROT5_MODEL_PATH
 
-# Step 1: Generate embeddings
 print("Generating ProtT5 embeddings...")
 generate_protT5_embeddings(
     input_pkl=INPUT_PKL,
@@ -29,7 +27,6 @@ generate_protT5_embeddings(
     tokenizer_path=PROT5_TOKENIZER_PATH
 )
 
-# Step 2: Compute pairwise cosine similarity
 print("Computing Prot5 cosine similarity...")
 compute_similarity_from_embeddings(
     embedding_pkl=PROT5_EMBEDDING_PKL,

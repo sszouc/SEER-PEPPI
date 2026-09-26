@@ -15,10 +15,8 @@ T5_REC = "features/protein_t5.pkl"
 
 
 print('准备构建图')
-# 步骤2：构建图结构
-# from GraphEdgeBuilder import EdgeBuilder
 from GraphEdgeBuilder import EdgeBuilder
-builder = EdgeBuilder(device=0) #gpu从6改成0
+builder = EdgeBuilder(device=0)
 builder.load_samples(
     positive_file=Path(OUTPUT_DIR) / "positive_pairs.txt",
     negative_file=Path(OUTPUT_DIR) / "negative_pairs.txt"
@@ -35,14 +33,6 @@ builder.construct_graph(
     pro_threshold_high=10,
 )
 
-
-
-print('图构建结束')
-
-# 如果您确实没有使用NodeFeatureSetter，并且PretrainedFeatureManager接收到空的missing_files，
-# 您可以传递空列表。
-print('正在加载预训练特征到图上...')
-# 步骤3：加载预训练特征并清理图
 from PretrainedFeatureManager import PretrainedFeatureManager
 manager = PretrainedFeatureManager(
     G=builder.G,
@@ -55,5 +45,4 @@ manager = PretrainedFeatureManager(
 )
 manager.set_pretrained_features()
 manager.remove_nodes_without_features()
-print('正在保存图中...')
 manager.save_graph()

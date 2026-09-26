@@ -3,9 +3,6 @@ import re
 
 
 class BlastResultExtractor:
-    """
-    从 psiblast 输出结果中提取“最后一轮”的比对结果，并将其写入提取后的文件中。
-    """
 
     def __init__(self, input_folder, output_folder):
         self.input_folder = input_folder
@@ -13,10 +10,6 @@ class BlastResultExtractor:
         os.makedirs(self.output_folder, exist_ok=True)
 
     def extract_last_round(self, file_path):
-        """
-        提取最后一轮“Results from round X”的内容。
-        返回 (轮次编号, 内容)
-        """
         try:
             lines = open(file_path, encoding="utf-8").readlines()
         except UnicodeDecodeError:
@@ -37,9 +30,7 @@ class BlastResultExtractor:
         return last_round_id, lines[last_round_start:]
 
     def run(self):
-        """
-        遍历所有 *_results.txt 文件，提取最后一轮的内容。
-        """
+
         for fname in os.listdir(self.input_folder):
             if not fname.endswith("_results.txt"):
                 continue
@@ -52,5 +43,3 @@ class BlastResultExtractor:
                 out_path = os.path.join(self.output_folder, out_name)
                 with open(out_path, "w") as f:
                     f.writelines(content)
-
-        print("[BlastResultExtractor] 提取完成。")

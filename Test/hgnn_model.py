@@ -7,10 +7,6 @@ import dgl.nn.pytorch as dglnn
 
 
 class Test(nn.Module):
-    """
-    The GNN model you provided: projects pretrained features -> two-layer hetero GNN -> edge predictor.
-    Assumes node types 'peptide' and 'receptor' with node data 'pre_feat' present.
-    """
 
     def __init__(self):
         super().__init__()
@@ -45,7 +41,6 @@ class Test(nn.Module):
         self.res_proj1 = nn.Linear(512, 256)
         self.res_proj2 = nn.Linear(256, 128)
 
-        # edge predictor expects concat([src_h(128), dst_h(128)]) -> scalar
         self.edge_predictor = nn.Sequential(
             nn.Linear(128 * 2, 512),
             nn.ReLU(),
